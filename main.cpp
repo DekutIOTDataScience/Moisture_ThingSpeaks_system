@@ -104,17 +104,25 @@ void wifi_send(void){
     else
         pc.printf("No response while sending URL \r\n");
 }
-
-int main () {
-    
-    pc.baud(115200);
-    wifi_initialize();
-    
-    while (1) {
-        moistvalue = moistureSensor.read();
+void update_moisture(){
+    moistvalue = moistureSensor.read();
+    }
+void update_ThingSpeak()
+{
         pc.printf("Current moistvalue is = %.3f \r\n", moistvalue);
-        
         wifi_send();
         wait(1);
+    
     }
+int main () {
+    pc.baud(115200);
+    wifi_initialize();
+      // Using an event queue is a very useful abstraction around many microcontroller 'problems', like dealing with ISRs
+    // see https://developer.mbed.org/blog/entry/Simplify-your-code-with-mbed-events/
+    eventThread.start(callback(&eventQueue, &EventQueue::dispatch_forever));
+    // Read the moisture data every second
+    eventQueue.call_every(1000, &update_moisture);
+    //update the moisture value to Thingspeak Servers
+    eventQueue.call_every(5000, &update_ThingSpeak);
+    wait(osWaitForever);
 }
