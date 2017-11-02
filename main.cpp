@@ -29,7 +29,7 @@ int timeout = 8000; //timeout for wifi commands
 float moistvalue = 0; 
 
 //Update key for thingspeak
-char* Update_Key = "AN84FJAZQX06UGQP";
+char* Update_API Key = "AN84FJAZQX06UGQP";
  
 //Wifi init function
 void wifi_initialize(void){
