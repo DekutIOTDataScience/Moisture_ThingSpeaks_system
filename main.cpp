@@ -4,7 +4,7 @@
 Serial pc(USBTX,USBRX);
 
 static EventQueue eventQueue;               // An event queue
-static Thread eventThread;                  // An RTOS thread to process events in
+static Thread eventThread;                  // An RTOS thread to process eventsin
 
 // Moisture sensor
 AnalogIn moistureSensor(A0);
@@ -29,7 +29,7 @@ int timeout = 8000; //timeout for wifi commands
 float moistvalue = 0; 
 
 //Update key for thingspeak
-char* Update_API Key = "AN84FJAZQX06UGQP";
+char* Update_WRITE API Key = "AN84FJAZQX06UGQP";
  
 //Wifi init function
 void wifi_initialize(void){
